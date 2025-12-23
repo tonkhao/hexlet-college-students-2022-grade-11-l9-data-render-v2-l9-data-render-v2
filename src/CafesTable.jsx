@@ -1,18 +1,26 @@
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import axios from "axios";
 import FilterCafes from "./FilterCafes";
 
 
 export default function CafesTable() {
-    useEffect(async () => {
-        const cafes = await axios.get('http://localhost:8070/cafes');
-        console.log(cafes);
-        return () => {
-            ;s
+    const [cafes, setCafes] = useState([]);
+    useEffect(() => {
+        const fetchCafes = async () => {
+            try {
+                const result = await axios.get('http://localhost:8070/cafes');
+                setCafes(result.data.cafes); 
+            } catch (error) {
+                console.error("Error fetching cafes:", error);
+            }
         };
+        fetchCafes();
     }, []);
-    return <div class='cafesTable'>
+    if (cafes.length === 0) return <div>Loading...</div>;
+    return <div className='cafesTable'>
         <FilterCafes />
-        <ul class="cardsList"></ul>
+        <ul className="cardsList">
+            {cafes.map(cafe => <li>{cafe.name}</li>)}
+        </ul>
     </div>
 }
