@@ -9,7 +9,7 @@ export default function CafesTable() {
         const fetchCafes = async () => {
             try {
                 const result = await axios.get('http://localhost:8070/cafes');
-                setCafes(result.data.cafes); 
+                setCafes(result.data.cafes);
             } catch (error) {
                 console.error("Error fetching cafes:", error);
             }
@@ -20,7 +20,16 @@ export default function CafesTable() {
     return <div className='cafesTable'>
         <FilterCafes />
         <ul className="cardsList">
-            {cafes.map(cafe => <li>{cafe.name}</li>)}
+            {cafes.map(cafe => {
+                return <li className="card">
+                    <img src={cafe.img} alt={cafe.code} />
+                    <h2>{cafe.name}</h2>
+                    <p>{cafe.decs}</p>
+                    <p>{cafe.address}</p>
+                    <p>{cafe.code}</p>
+                    <p>{cafe.workTime}</p>
+                </li>
+            })}
         </ul>
     </div>
 }
