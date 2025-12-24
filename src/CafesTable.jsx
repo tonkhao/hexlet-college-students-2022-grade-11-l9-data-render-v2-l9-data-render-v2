@@ -12,7 +12,6 @@ export default function CafesTable() {
                 const result = await axios.get('http://localhost:8070/cafes');
                 setCafes(result.data.cafes);
                 setInitialCafes(result.data.cafes)
-                console.log(initialCafeState)
             } catch (error) {
                 console.error("Error fetching cafes:", error);
             }
