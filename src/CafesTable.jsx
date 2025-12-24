@@ -2,6 +2,29 @@ import { useEffect, useState } from 'react';
 import axios from "axios";
 import FilterCafes from "./FilterCafes";
 
+const filters = [
+	{
+		name: "Арбатская",
+		code: "Arbat",
+	},
+	{
+		name: "Александровский сад",
+		code: "Alexanders Garden",
+	},
+	{
+		name: "Московская",
+		code: "Moscow",
+	},
+	{
+		name: "Парк Культуры",
+		code: "Culture",
+	},
+	{
+		name: "Театральная",
+		code: "Theater",
+	},
+];
+
 
 export default function CafesTable() {
     const [initialCafeState, setInitialCafes] = useState([]);
@@ -32,9 +55,8 @@ export default function CafesTable() {
         const filteredCafes = initialCafeState.filter(cafe => cafe.subwayCode === subwayCode)
         setCafes(filteredCafes)
     }
-    if (cafes.length === 0) return <div>Loading...</div>;
     return <div className='cafesTable'>
-        <FilterCafes cafes={initialCafeState} onHandleFilterChange={onHandleFilterChange} />
+        <FilterCafes filters={filters} onHandleFilterChange={onHandleFilterChange} />
         <ul className="cardsList">
             {cafes.map(cafe => {
                 return <li className="card">

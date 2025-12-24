@@ -5,8 +5,8 @@ export default function FilterCafes(props) {
     return <div className="controls">
         <select name="subway" id="subway" onChange={handleChangeFilter}>
             <option value="All">Все</option>
-            {props.cafes.map(cafe => {
-                return <option value={cafe.subwayCode}>{cafe.subwayCode}</option>
+            {props.filters.map(filter => {
+                return <option value={filter.code}>{filter.name}</option>
             })}
         </select>
     </div>
